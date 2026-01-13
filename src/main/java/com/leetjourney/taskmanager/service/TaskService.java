@@ -7,6 +7,8 @@ import com.leetjourney.taskmanager.exception.TaskNotFoundException;
 import com.leetjourney.taskmanager.mapper.TaskMapper;
 import com.leetjourney.taskmanager.repository.TaskRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,6 +28,10 @@ public class TaskService {
 
     public List<Task> getAllTasks() {
         return taskRepository.findAll();
+    }
+
+    public Page<Task> getAllTasks(Pageable pageable) {
+        return taskRepository.findAll(pageable);
     }
 
     public TaskResponse getTaskById(Long id) {
@@ -59,6 +65,12 @@ public class TaskService {
         return completedTasks.stream()
                 .map(taskMapper::toResponse)
                 .toList();
+    }
+
+    public Page<TaskResponse> getTasksByCompletionStatus(boolean status,
+                                                         Pageable pageable) {
+        final Page<Task> completedTasks = taskRepository.findByCompleted(status, pageable);
+        return completedTasks.map(taskMapper::toResponse);
     }
 
     public List<TaskResponse> searchTasksByTitle(String title) {
