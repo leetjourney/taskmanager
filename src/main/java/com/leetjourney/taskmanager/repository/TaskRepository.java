@@ -28,4 +28,12 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     @Query("SELECT t FROM Task t WHERE t.completed = :completed")
     Page<Task> findTasksByCompletionStatus(@Param("completed") boolean completed,
                                            Pageable pageable);
+
+    @Query("SELECT t " +
+            "FROM Task t " +
+            "WHERE LOWER(t.title) LIKE " +
+            "LOWER(CONCAT('%', :title, '%')) AND t.completed = :completed")
+    Page<Task> findByTitleContainingAndCompleted(String title,
+                                                 boolean completed,
+                                                 Pageable pageable);
 }
