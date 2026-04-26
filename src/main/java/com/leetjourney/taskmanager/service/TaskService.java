@@ -26,6 +26,21 @@ public class TaskService {
         this.taskMapper = taskMapper;
     }
 
+    public Page<Task> searchTasksByTitle(String title, Pageable pageable) {
+        return taskRepository.findByTitleContainingIgnoreCase(title, pageable);
+    }
+
+    public Page<Task> searchTasksByTitleAndCompletion(String title,
+                                                      Boolean completed,
+                                                      Pageable pageable) {
+        return taskRepository.findByTitleContainingAndCompleted(title,
+                completed, pageable);
+    }
+
+    public Page<Task> getTasksByCompletion(Boolean completed, Pageable pageable) {
+        return taskRepository.findByCompleted(completed, pageable);
+    }
+
     public List<Task> getAllTasks() {
         return taskRepository.findAll();
     }
