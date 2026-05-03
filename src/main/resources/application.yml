@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: taskmanager
+
+  #H2 Db Configuration
+  datasource:
+    url: jdbc:h2:mem:taskdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  #JPA Configuration
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+        ddl-auto: update
+    show-sql: true
+
+# Custom application properties
+app:
+  name: Task Manager
+  version: 1.0.0
+  max-tasks-per-page: 10
