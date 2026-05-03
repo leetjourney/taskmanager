@@ -1,5 +1,6 @@
 package com.leetjourney.taskmanager.dto;
 
+import com.leetjourney.taskmanager.entity.Category;
 import lombok.Builder;
 
 import java.time.LocalDateTime;
@@ -10,6 +11,7 @@ public record TaskResponse(
         String title,
         String description,
         Boolean completed,
-        LocalDateTime createdAt
+        LocalDateTime createdAt,
+        CategoryResponse category
 ) {
 }
