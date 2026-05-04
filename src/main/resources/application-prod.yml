@@ -1,15 +1,13 @@
 spring:
   application:
     name: taskmanager
-  profiles:
-    active: dev
 
   #H2 Db Configuration
   datasource:
     url: jdbc:h2:mem:taskdb
     driverClassName: org.h2.Driver
     username: sa
-    password: password
+    password: prod-password
   h2:
     console:
       enabled: true
@@ -20,7 +18,7 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
         ddl-auto: update
-    show-sql: true
+    show-sql: false
 
 # Custom application properties
 app:
