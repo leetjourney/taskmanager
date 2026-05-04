@@ -22,6 +22,27 @@ spring:
         ddl-auto: update
     show-sql: true
 
+#actuator configuration
+management:
+    endpoints:
+        web:
+            exposure:
+                include: health,info,metrics,env,logger,beans,mappings
+            base-path: /actuator
+    endppoints:
+        health:
+            show-details: always
+
+    info:
+      env:
+        enabled: true
+
+info:
+  app:
+    description: A simple task management application built with Spring Boot.
+    version: 1.0.0
+    author: Leet Journey
+
 # Custom application properties
 app:
   name: Task Manager
